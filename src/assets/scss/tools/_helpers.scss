@@ -1,0 +1,66 @@
+/*------------------------------------*\
+		Positionnement & Display
+\*------------------------------------*/
+
+// Depth
+.z1 { z-index: 1; }
+
+// Display
+.db   { display: block; }
+.dn   { display: none; }
+.dt   { display: table; }
+.dtc  { display: table-cell; }
+.dib  { display: inline-block; }
+
+// Clearfix
+.cf { @include clearfix; }
+
+// Positions
+.posa { position: absolute; }
+.posf { position: fixed; }
+.poss { position: static; }
+.posr { position: relative; }
+
+.t0 { top: 0; }
+.r0 { right: 0; }
+.b0 { bottom: 0; }
+.l0 { left: 0; }
+
+.t1 { top: $line-height * 1rem; }
+.r1 { right: $line-height * 1rem; }
+.b1 { bottom: $line-height * 1rem; }
+.l1 { left: $line-height * 1rem; }
+
+.t50p { top: 50%; }
+.l50p { left: 50%; }
+
+// Sizes
+.w100p { width: 100%; }
+.h100p { height: 100%; }
+
+// Margins
+.mt1 { margin-top: $line-height * 1rem; }
+.mr1 { margin-right: $line-height * 1rem; }
+.mb1 { margin-bottom: $line-height * 1rem; }
+.ml1 { margin-left: $line-height * 1rem; }
+
+// Paddings
+.pdt1 { padding-top: $line-height * 1rem; }
+.pdr1 { padding-right: $line-height * 1rem; }
+.pdb1 { padding-bottom: $line-height * 1rem; }
+.pdl1 { padding-left: $line-height * 1rem; }
+
+
+/*------------------------------------*\
+		Typographie
+\*------------------------------------*/
+
+// Alignement de texte
+.tac { text-align: center; }
+.tal { text-align: left; }
+.tar { text-align: right; }
+
+// Weights
+.fw400 { font-weight: 400; }
+.fw500 { font-weight: 500; }
+.fw700 { font-weight: 700; }
