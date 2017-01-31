@@ -3,7 +3,9 @@
 \*------------------------------------*/
 
 // Depth
-.z1 { z-index: 1; }
+@each $layer in $z-layers {
+	.z#{nth($layer, 2)} { z-index: z("#{nth($layer, 1)}"); }
+}
 
 // Display
 .db   { display: block; }
@@ -67,6 +69,18 @@
 .fw700 { font-weight: 700; }
 
 
+
+/*------------------------------------*\
+    Styles
+\*------------------------------------*/
+
+// Borders
+.bd2s { border: 2px solid; }
+
+// Border-radius
+.bdrs50p { border-radius: 50%; }
+
+.curn { cursor: none; }
 
 /*------------------------------------*\
     Tranformations

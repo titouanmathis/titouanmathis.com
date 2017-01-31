@@ -1,7 +1,8 @@
 <template>
 	<transition appear
 		v-on:enter="enter"
-		v-on:leave="leave">
+		v-on:leave="leave"
+		mode="out-in">
 
 		<div class="dots"></div>
 
