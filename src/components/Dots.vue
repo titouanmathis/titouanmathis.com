@@ -1,8 +1,15 @@
 <template>
-	<div class="dots"></div>
+	<transition appear
+		v-on:enter="enter"
+		v-on:leave="leave">
+
+		<div class="dots"></div>
+
+	</transition>
 </template>
 
 <script>
+	import { forEach } from 'foreach'
 	import { on, once, off } from 'sm-events'
 	import { degToRad } from 'math'
 	import { handleEvent } from '../utils/mixins'
@@ -16,8 +23,7 @@
 			return {
 				radius: 36,
 				total: 10,
-				// $containers: [],
-				// $dots: [],
+				isDestroyed: true,
 				width: window.innerWidth,
 				height: window.innerHeight,
 				progress: 0,
@@ -33,6 +39,12 @@
 			},
 			tl() {
 				return new TimelineMax({ paused: true })
+			},
+			$containers() {
+				return []
+			},
+			$dots() {
+				return []
 			}
 		},
 
@@ -55,6 +67,8 @@
 			},
 
 			loop() {
+				if (this.isDestroyed) return
+
 				this.targetProgress = this.x / this.width
 				this.progress += (this.targetProgress - this.progress) * 0.05
 				if (this.progress < 0.01) this.progress = 0
@@ -94,24 +108,55 @@
 			resizeHandler() {
 				this.width = window.innerWidth
 				this.height = window.innerHeight
+			},
+
+			enter($el, done) {
+
+				TweenMax.staggerFrom(this.$dots, 1, {
+					scaleX: 0,
+					scaleY: 0,
+					x: 0,
+					y: 0,
+					ease: Expo.easeOut
+				}, 0.01, done)
+
+			},
+
+			leave($el, done) {
+
+				this.isDestroyed = true
+
+				off(document, 'mousemove', this)
+				off(document, 'touchstart', this)
+				off(document, 'touchmove', this)
+
+				TweenMax.staggerTo(this.$dots, 0.6, {
+					scaleX: 0,
+					scaleY: 0,
+					x: 0,
+					y: 0,
+					ease: Expo.easeInOut
+				}, 0.01, done)
+
+				setTimeout(() => {
+					TweenMax.staggerTo(this.$dots, 0.3, {
+						opacity: 0,
+						ease: Expo.easeOut
+					}, 0.01, done)
+				}, 300);
+
 			}
 
 		},
 
 		created() {
+			this.isDestroyed = false
 
 			on(document, 'mousemove', this)
 			once(document, 'mousemove', this.loop.bind(this))
 
 			on(document, 'touchstart', this)
 			on(document, 'touchmove', this)
-
-		},
-
-		mounted() {
-
-			this.$containers = []
-			this.$dots = []
 
 			for (let n = 0; n <= this.total; n++) {
 				const $container = this.createContainer();
@@ -128,7 +173,6 @@
 					$container.appendChild($dot)
 
 					TweenMax.set($dot, {
-						// opacity: 0,
 						x: numberOfDots > 1 ? x : 0,
 						y: numberOfDots > 1 ? y : 0,
 						z: (n + 1) * -1,
@@ -157,17 +201,16 @@
 					ease: Expo.easeInOut
 				}, n / 5)
 
-				this.$el.appendChild($container)
 				this.$containers.push($container)
 			}
 
-			TweenMax.staggerFrom(this.$dots, 1, {
-				scaleX: 0,
-				scaleY: 0,
-				x: 0,
-				y: 0,
-				ease: Expo.easeOut
-			}, 0.01)
+		},
+
+		mounted() {
+
+			forEach(this.$containers, ($container) =>{
+				this.$el.appendChild($container)
+			})
 
 		},
 

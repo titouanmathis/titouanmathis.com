@@ -9,6 +9,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "foreach": "git+ssh://git@bitbucket.org/studiometa/foreach.git",
     "gsap": "^1.19.1",
     "math": "git+ssh://git@bitbucket.org/studiometa/math.git",
     "sm-events": "git+ssh://git@bitbucket.org/studiometa/events.git",
