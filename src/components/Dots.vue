@@ -14,6 +14,7 @@
 	import { on, once, off } from 'sm-events'
 	import { degToRad } from 'math'
 	import { handleEvent } from '../utils/mixins'
+	import { mapState } from 'vuex'
 
 	export default {
 		name: 'dots',
@@ -25,8 +26,6 @@
 				radius: 36,
 				total: 10,
 				isDestroyed: true,
-				width: window.innerWidth,
-				height: window.innerHeight,
 				progress: 0,
 				targetProgress: 0,
 				size: 1,
@@ -46,7 +45,8 @@
 			},
 			$dots() {
 				return []
-			}
+			},
+			...mapState(['POINTER_X', 'POINTER_Y', 'VIEW_WIDTH', 'VIEW_HEIGHT'])
 		},
 
 		methods: {
@@ -70,11 +70,11 @@
 			loop() {
 				if (this.isDestroyed) return
 
-				this.targetProgress = this.x / this.width
+				this.targetProgress = this.POINTER_X / this.VIEW_WIDTH
 				this.progress += (this.targetProgress - this.progress) * 0.05
 				if (this.progress < 0.01) this.progress = 0
 
-				this.targetSize = 0.025 + (this.y * 0.975 / this.height)
+				this.targetSize = 0.025 + (this.POINTER_Y * 0.975 / this.VIEW_HEIGHT)
 				this.size += (this.targetSize - this.size) * 0.1
 
 				TweenMax.set(this.$dots, {
@@ -85,30 +85,6 @@
 				this.tl.progress(this.progress)
 
 				requestAnimationFrame(this.loop.bind(this))
-			},
-
-			mousemoveHandler(e) {
-				this.setPosition(e.clientX, e.clientY)
-			},
-
-			touchstartHandler(e) {
-				const touch = e.touhes[0]
-				this.setPosition(touch.clientX, touch.clientY)
-			},
-
-			touchmoveHandler(e) {
-				const touch = e.touches[0]
-				this.setPosition(touch.clientX, touch.clientY)
-			},
-
-			setPosition(x, y) {
-				this.x = x
-				this.y = y
-			},
-
-			resizeHandler() {
-				this.width = window.innerWidth
-				this.height = window.innerHeight
 			},
 
 			enter($el, done) {
@@ -126,10 +102,6 @@
 			leave($el, done) {
 
 				this.isDestroyed = true
-
-				off(document, 'mousemove', this)
-				off(document, 'touchstart', this)
-				off(document, 'touchmove', this)
 
 				TweenMax.staggerTo(this.$dots, 0.6, {
 					scaleX: 0,
@@ -153,11 +125,7 @@
 		created() {
 			this.isDestroyed = false
 
-			on(document, 'mousemove', this)
 			once(document, 'mousemove', this.loop.bind(this))
-
-			on(document, 'touchstart', this)
-			on(document, 'touchmove', this)
 
 			for (let n = 0; n <= this.total; n++) {
 				const $container = this.createContainer();
@@ -213,12 +181,6 @@
 				this.$el.appendChild($container)
 			})
 
-		},
-
-		beforeDestroy() {
-			off(document, 'mousemove', this)
-			off(document, 'touchstart', this)
-			off(document, 'touchmove', this)
 		}
 	}
 </script>

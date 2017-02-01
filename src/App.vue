@@ -32,6 +32,7 @@
 
 	import { handleEvent } from './utils/mixins'
 	import { on, off } from 'sm-events'
+	import { debounce } from 'debounce'
 
 	export default {
 		name: 'app',
@@ -47,6 +48,9 @@
 		computed: {
 			isMac() {
 				return navigator.platform === 'MacIntel' || navigator.platform === 'MacPPC'
+			},
+			debounceResize() {
+				return debounce(100, false, (e) => this.resizeHandler(e))
 			}
 		},
 		components: {
@@ -73,14 +77,46 @@
 
 			pad(value, length) {
 				return value.toString().length < length ? this.pad('0' + value, length) : value
+			},
+
+			resizeHandler(e) {
+				this.$store.commit('SET_VIEW_WIDTH', window.innerWidth)
+				this.$store.commit('SET_VIEW_WIDTH', window.innerHeight)
+			},
+
+			mousemoveHandler(e) {
+				this.setPointerPosition(e.clientX, e.clientY)
+			},
+
+			touchmoveHandler(e) {
+				const touch = e.touches[0]
+				this.setPointerPosition(touch.clientX, touch.clientY)
+			},
+
+			touchstartHandler(e) {
+				const touch = e.touches[0]
+				this.setPointerPosition(touch.clientX, touch.clientY)
+			},
+
+			setPointerPosition(x, y) {
+				this.$store.commit('SET_POINTER_X', x)
+				this.$store.commit('SET_POINTER_Y', y)
 			}
 		},
 		created() {
 			this.isMac && document.body.classList.add('is-mac')
 			on(document, 'keyup', this)
+			on(document, 'mousemove', this)
+			on(document, 'touchmove', this)
+			on(document, 'touchstart', this)
+			on(window, 'resize', this.debounceResize)
 		},
 		beforeDestroy() {
 			off(document, 'keyup', this)
+			off(document, 'mousemove', this)
+			off(document, 'touchmove', this)
+			off(document, 'touchstart', this)
+			off(window, 'resize', this.debounceResize)
 		}
 	}
 </script>
