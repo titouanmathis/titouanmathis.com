@@ -15,6 +15,7 @@
 	import { on, once, off } from 'sm-events'
 	import { degToRad } from 'math'
 	import { handleEvent } from '../utils/mixins'
+	import { mapState } from 'vuex'
 
 	export default {
 		name: 'trail',
@@ -26,10 +27,6 @@
 				radius: 8,
 				total: 12,
 				isDestroyed: true,
-				width: window.innerWidth,
-				height: window.innerHeight,
-				targetX: window.innerWidth / 2,
-				targetY: window.innerHeight / 2
 			}
 		},
 
@@ -39,7 +36,8 @@
 			},
 			$dots() {
 				return []
-			}
+			},
+			...mapState(['POINTER_X', 'POINTER_Y', 'VIEW_WIDTH', 'VIEW_HEIGHT'])
 		},
 
 		methods: {
@@ -58,8 +56,8 @@
 				if (this.isDestroyed) return
 
 				forEach(this.$dots, ($dot, index) => {
-					$dot.__x += (this.targetX - $dot.__x) * (((index + 5) / 40) - 0.05)
-					$dot.__y += (this.targetY - $dot.__y) * (((index + 5) / 40) - 0.05)
+					$dot.__x += (this.POINTER_X - $dot.__x) * (((index + 5) / 40) - 0.05)
+					$dot.__y += (this.POINTER_Y - $dot.__y) * (((index + 5) / 40) - 0.05)
 
 					TweenMax.set($dot, {
 						x: $dot.__x,
@@ -70,44 +68,18 @@
 				requestAnimationFrame(this.loop.bind(this))
 			},
 
-			mousemoveHandler(e) {
-				this.setPosition(e.clientX, e.clientY)
-			},
-
-			touchstartHandler(e) {
-				const touch = e.touhes[0]
-				this.setPosition(touch.clientX, touch.clientY)
-			},
-
-			touchmoveHandler(e) {
-				const touch = e.touches[0]
-				this.setPosition(touch.clientX, touch.clientY)
-			},
-
-			setPosition(x, y) {
-				this.targetX = x
-				this.targetY = y
-			},
-
-			resizeHandler() {
-				this.width = window.innerWidth
-				this.height = window.innerHeight
-			},
-
 			enter($el, done) {
 
 				TweenMax.staggerFrom(this.$dots, 1, {
 					scaleX: 0,
 					scaleY: 0,
+					x: this.VIEW_WIDTH / 2,
+					y: this.VIEW_HEIGHT / 2,
 					opacity: 0,
 					ease: Expo.easeOut
 				}, 0.02, () => {
 					done()
-					on(document, 'mousemove', this)
 					once(document, 'mousemove', this.loop.bind(this))
-
-					on(document, 'touchstart', this)
-					on(document, 'touchmove', this)
 				})
 
 			},
@@ -116,15 +88,11 @@
 
 				this.isDestroyed = true
 
-				off(document, 'mousemove', this)
-				off(document, 'touchstart', this)
-				off(document, 'touchmove', this)
-
 				TweenMax.staggerTo(this.$dots, 0.6, {
 					scaleX: 0,
 					scaleY: 0,
-					x: window.innerWidth / 2,
-					y: window.innerHeight / 2,
+					x: this.VIEW_WIDTH / 2,
+					y: this.VIEW_HEIGHT / 2,
 					ease: Expo.easeInOut
 				}, 0.01, done)
 
@@ -146,8 +114,8 @@
 				const $dot = this.createDot()
 				const size = (n * 2) * this.radius
 
-				$dot.__x = window.innerWidth / 2
-				$dot.__y = window.innerHeight / 2
+				$dot.__x = this.POINTER_X
+				$dot.__y = this.POINTER_Y
 
 				TweenMax.set($dot, {
 					zIndex: this.total - n,
@@ -170,12 +138,6 @@
 				this.$el.appendChild($dot)
 			})
 
-		},
-
-		beforeDestroy() {
-			off(document, 'mousemove', this)
-			off(document, 'touchstart', this)
-			off(document, 'touchmove', this)
 		}
 	}
 </script>
