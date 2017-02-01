@@ -9,11 +9,13 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "debounce": "git+ssh://git@bitbucket.org/studiometa/debounce.git",
     "foreach": "git+ssh://git@bitbucket.org/studiometa/foreach.git",
     "gsap": "^1.19.1",
     "math": "git+ssh://git@bitbucket.org/studiometa/math.git",
     "sm-events": "git+ssh://git@bitbucket.org/studiometa/events.git",
-    "vue": "^2.1.0"
+    "vue": "^2.1.0",
+    "vuex": "^2.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
