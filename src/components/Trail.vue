@@ -70,6 +70,8 @@
 
 			enter($el, done) {
 
+				this.loop()
+
 				TweenMax.staggerFrom(this.$dots, 1, {
 					scaleX: 0,
 					scaleY: 0,
@@ -77,16 +79,14 @@
 					y: this.VIEW_HEIGHT / 2,
 					opacity: 0,
 					ease: Expo.easeOut
-				}, 0.02, () => {
-					done()
-					once(document, 'mousemove', this.loop.bind(this))
-				})
+				}, 0.02, done)
 
 			},
 
 			leave($el, done) {
 
 				this.isDestroyed = true
+				$el.classList.remove('curn')
 
 				TweenMax.staggerTo(this.$dots, 0.6, {
 					scaleX: 0,
