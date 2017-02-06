@@ -18,7 +18,7 @@
 	import { mapState } from 'vuex'
 
 	export default {
-		name: 'trail',
+		name: 'two',
 
 		mixins: [ handleEvent() ],
 

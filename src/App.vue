@@ -27,8 +27,8 @@
 </template>
 
 <script>
-	import Trail from './components/Trail'
-	import Dots from './components/Dots'
+	import One from './components/001'
+	import Two from './components/002'
 
 	import { handleEvent } from './utils/mixins'
 	import { on, off } from 'sm-events'
@@ -39,7 +39,7 @@
 		mixins: [ handleEvent() ],
 		data() {
 			return {
-				components: [ Dots, Trail ],
+				components: [ One, Two ],
 				current: 0,
 				havePrev: false,
 				haveNext: true
@@ -54,8 +54,8 @@
 			}
 		},
 		components: {
-			Dots,
-			Trail
+			One,
+			Two
 		},
 		watch: {
 			current(newValue, oldValue) {
