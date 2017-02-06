@@ -1,6 +1,6 @@
 {
   "name": "titouanmathis.com",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Code for titouanmathis.com",
   "author": "Titouan Mathis <titouan.mathis@gmail.com>",
   "private": true,
@@ -9,11 +9,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "debounce": "git+ssh://git@bitbucket.org/studiometa/debounce.git",
-    "foreach": "git+ssh://git@bitbucket.org/studiometa/foreach.git",
+    "debounce": "git+https://titouanmathis@bitbucket.org/studiometa/debounce.git",
+    "foreach": "git+https://titouanmathis@bitbucket.org/studiometa/foreach.git",
     "gsap": "^1.19.1",
-    "math": "git+ssh://git@bitbucket.org/studiometa/math.git",
-    "sm-events": "git+ssh://git@bitbucket.org/studiometa/events.git",
+    "math": "git+https://titouanmathis@bitbucket.org/studiometa/math.git",
+    "sm-events": "git+https://titouanmathis@bitbucket.org/studiometa/events.git",
     "vue": "^2.1.0",
     "vuex": "^2.1.1"
   },
