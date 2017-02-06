@@ -67,14 +67,6 @@ table {
 button,
 input {
 	font: inherit;
-
-	.mac & {
-		-webkit-font-smoothing: antialiased;
-		-moz-font-smoothing: antialiased;
-		font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		-moz-osx-font-smoothing: antialiased;
-	}
 }
 
 button {
