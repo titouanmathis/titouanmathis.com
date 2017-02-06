@@ -23,10 +23,10 @@ html {
 }
 
 // Better font rendering for mac
-.is-mac,
-.is-mac input,
-.is-mac button,
-.is-mac textarea {
+html,
+input,
+button,
+textarea {
 	@include antialiased;
 }
 
@@ -155,7 +155,8 @@ strong {
 .fw500 { font-weight: 500; }
 .fw700 { font-weight: 700; }
 
-
+// Transforms
+.ttl { text-transform: lowercase; }
 
 /*------------------------------------*\
     Styles
