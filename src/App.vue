@@ -27,8 +27,8 @@
 </template>
 
 <script>
-	import Trail from './components/Trail'
-	import Dots from './components/Dots'
+	import One from './experiments/001'
+	import Two from './experiments/002'
 
 	import { handleEvent } from './utils/mixins'
 	import { on, off } from 'sm-events'
@@ -39,7 +39,7 @@
 		mixins: [ handleEvent() ],
 		data() {
 			return {
-				components: [ Dots, Trail ],
+				experiments: [ One, Two ],
 				current: 0,
 				havePrev: false,
 				haveNext: true
@@ -60,7 +60,10 @@
 		watch: {
 			current(newValue, oldValue) {
 				this.havePrev = this.current > 0
-				this.haveNext = this.current < this.components.length - 1
+				this.haveNext = this.current < this.experiments.length - 1
+			},
+			'window.location.hash': (newValue, oldValue) => {
+				console.log('hash has changed');
 			}
 		},
 		methods: {
