@@ -6,7 +6,7 @@
 			<p><a href="https://twitter.com/titouanmathis" target="_blank">twitter</a> — <a href="https://instagram.com/titouanmathis" target="_blank">instagram</a></p>
 		</div>
 
-		<component :is="components[current]" class="posa t0 l0 w100p h100p"></component>
+		<component :is="experiments[current]" class="posa t0 l0 w100p h100p"></component>
 
 		<div class="z100 posa t1 r1 tar">
 			<p>lead developer<br>at <a href="http://www.studiometa.fr" title="Agence Web Strasbourg" target="_blank">studio meta</a></p>
@@ -29,6 +29,7 @@
 <script>
 	import One from './experiments/001'
 	import Two from './experiments/002'
+	import Three from './experiments/003'
 
 	import { handleEvent } from './utils/mixins'
 	import { on, off } from 'sm-events'
@@ -39,7 +40,7 @@
 		mixins: [ handleEvent() ],
 		data() {
 			return {
-				experiments: [ One, Two ],
+				experiments: [ One, Two, Three ],
 				current: 0,
 				havePrev: false,
 				haveNext: true
@@ -54,8 +55,9 @@
 			}
 		},
 		components: {
-			Dots,
-			Trail
+			One,
+			Two,
+			Three
 		},
 		watch: {
 			current(newValue, oldValue) {
