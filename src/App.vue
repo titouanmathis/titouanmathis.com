@@ -6,13 +6,13 @@
 			<p><a href="https://twitter.com/titouanmathis" target="_blank">twitter</a> — <a href="https://instagram.com/titouanmathis" target="_blank">instagram</a></p>
 		</div>
 
-		<component :is="components[current]" class="posa t0 l0 w100p h100p"></component>
+		<component :is="experiments[current]" class="posa t0 l0 w100p h100p"></component>
 
 		<div class="z100 posa t1 r1 tar">
 			<p>lead developer<br>at <a href="http://www.studiometa.fr" title="Agence Web Strasbourg" target="_blank">studio meta</a></p>
 		</div>
 
-		<div @click="next" v-if="haveNext" class="z100 posa r1 b1 z1">
+		<div @click.stop="next" @touchstart.stop @mousemove.stop @touchmove.stop v-if="haveNext" class="z100 posa r1 b1 z1">
 			<a>next→</a>
 		</div>
 
@@ -20,7 +20,7 @@
 			<strong>#{{ pad(current + 1, 3) }}</strong>
 		</div>
 
-		<div @click="prev" v-if="havePrev" class="z100 posa b1 l1 z1">
+		<div @click.stop="prev" @touchstart.stop @mousemove.stop @touchmove.stop v-if="havePrev" class="z100 posa b1 l1 z1">
 			<a>← prev</a>
 		</div>
 	</main>
@@ -29,6 +29,7 @@
 <script>
 	import One from './experiments/001'
 	import Two from './experiments/002'
+	// import Three from './experiments/003'
 
 	import { handleEvent } from './utils/mixins'
 	import { on, off } from 'sm-events'
@@ -54,8 +55,9 @@
 			}
 		},
 		components: {
-			Dots,
-			Trail
+			One,
+			Two,
+			// Three
 		},
 		watch: {
 			current(newValue, oldValue) {
@@ -67,10 +69,12 @@
 			}
 		},
 		methods: {
-			prev() {
+			prev(e) {
+				console.log(e);
 				this.current--
 			},
-			next() {
+			next(e) {
+				console.log(e);
 				this.current++
 			},
 			keyupHandler(e) {
@@ -88,15 +92,18 @@
 			},
 
 			mousemoveHandler(e) {
+				console.log('mousemoveHandler');
 				this.setPointerPosition(e.clientX, e.clientY)
 			},
 
 			touchmoveHandler(e) {
+				console.log('touchmoveHandler');
 				const touch = e.touches[0]
 				this.setPointerPosition(touch.clientX, touch.clientY)
 			},
 
 			touchstartHandler(e) {
+				console.log('touchstartHandler');
 				const touch = e.touches[0]
 				this.setPointerPosition(touch.clientX, touch.clientY)
 			},
