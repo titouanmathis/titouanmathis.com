@@ -1,6 +1,6 @@
 {
   "name": "titouanmathis.com",
-  "version": "1.4.5",
+  "version": "1.5.0",
   "description": "Code for titouanmathis.com",
   "author": "Titouan Mathis <titouan.mathis@gmail.com>",
   "private": true,
@@ -15,6 +15,7 @@
     "math": "git+https://titouanmathis@bitbucket.org/studiometa/math.git",
     "sm-events": "git+https://titouanmathis@bitbucket.org/studiometa/events.git",
     "vue": "^2.1.0",
+    "vue-router": "^2.2.0",
     "vuex": "^2.1.1"
   },
   "devDependencies": {

@@ -4,7 +4,7 @@
 		v-on:leave="leave"
 		mode="out-in">
 
-		<div class="dots"></div>
+		<div class="one"></div>
 
 	</transition>
 </template>
@@ -17,13 +17,12 @@
 	import { mapState } from 'vuex'
 
 	export default {
-		name: 'dots',
+		name: 'one',
 
 		mixins: [ handleEvent() ],
 
 		data() {
 			return {
-				radius: 36,
 				total: 10,
 				isDestroyed: true,
 				progress: 0,
@@ -34,6 +33,9 @@
 		},
 
 		computed: {
+			radius() {
+				return this.VIEW_WIDTH > this.VIEW_HEIGHT ? this.VIEW_HEIGHT / 20 : this.VIEW_WIDTH / 20
+			},
 			dotSize() {
 				return this.radius * 5
 			},
@@ -59,7 +61,7 @@
 
 			createDot() {
 				const $dot = this.createDiv()
-				$dot.classList.add('dot', 'posa', 't50p', 'l50p')
+				$dot.classList.add('one__item', 'posa', 't50p', 'l50p')
 				return $dot
 			},
 
@@ -188,12 +190,12 @@
 <style lang="scss">
 	@import "../assets/scss/base/variables";
 
-	.dots {
+	.one {
 		transform-style: preserve-3d;
 		perspective: 5px;
 	}
 
-	.dot:after {
+	.one__item:after {
 		content: "";
 		position: absolute;
 		top: -50%;

@@ -7,6 +7,7 @@
 *:before {
 	position: relative;
 	outline: none;
+	box-sizing: border-box;
 }
 
 html,
@@ -18,8 +19,13 @@ body {
 }
 
 html {
-	font-size: $font-size;
+	font-size: $font-size - 2;
 	user-select: none;
+
+	// Media queries
+	@media #{md("small")} {
+		font-size: $font-size;
+	}
 }
 
 // Better font rendering for mac
@@ -93,6 +99,10 @@ strong {
 @each $layer in $z-layers {
 	.z#{nth($layer, 2)} { z-index: z("#{nth($layer, 1)}"); }
 }
+
+// Border-box
+.bxzcb { box-sizing: content-box; }
+.bxzbb { box-sizing: border-box; }
 
 // Display
 .db   { display: block; }
