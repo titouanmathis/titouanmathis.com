@@ -13,6 +13,26 @@ export default new Vuex.Store({
 		POINTER_X: window.innerWidth / 2,
 		POINTER_Y: window.innerHeight / 2
 	},
+	getters: {
+		ENV(state, getters) {
+
+			switch (window.location.hostname) {
+
+				// Production
+				case 'titouanmathis.com':
+				case 'www.titouanmathis.com':
+					return 'PROD'
+				break;
+
+				// Local
+				default:
+					return 'DEV'
+			}
+		},
+		DEBUG(state, getters) {
+			return getters.ENV !== 'PROD'
+		}
+	},
 	mutations,
 	actions
 })
