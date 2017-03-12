@@ -120,9 +120,6 @@
 				const $dot = this.createDot()
 				const size = (n * 2) * this.radius
 
-				console.log(this.radius);
-				console.log(this.borderWidth);
-
 				$dot.__x = this.VIEW_WIDTH / 2
 				$dot.__y = this.VIEW_HEIGHT / 2
 
