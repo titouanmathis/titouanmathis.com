@@ -12,9 +12,6 @@
 
 html,
 body {
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
 	background: $grey-dark;
 }
 
@@ -149,6 +146,8 @@ strong {
 .pdb1 { padding-bottom: $line-height * 1rem; }
 .pdl1 { padding-left: $line-height * 1rem; }
 
+// Overflow
+.ovh { overflow: hidden; }
 
 
 /*------------------------------------*\
