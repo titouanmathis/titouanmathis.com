@@ -88,6 +88,8 @@ strong {
 	font-weight: 700;
 }
 
+
+
 /*------------------------------------*\
 		Positionnement & Display
 \*------------------------------------*/
@@ -130,6 +132,13 @@ strong {
 .t50p { top: 50%; }
 .l50p { left: 50%; }
 
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 // Sizes
 .w100p { width: 100%; }
 .h100p { height: 100%; }
@@ -150,6 +159,7 @@ strong {
 .ovh { overflow: hidden; }
 
 
+
 /*------------------------------------*\
 		Typographie
 \*------------------------------------*/
@@ -167,6 +177,8 @@ strong {
 // Transforms
 .ttl { text-transform: lowercase; }
 
+
+
 /*------------------------------------*\
     Styles
 \*------------------------------------*/
@@ -179,8 +191,27 @@ strong {
 
 .curn { cursor: none; }
 
+
+
 /*------------------------------------*\
     Tranformations
 \*------------------------------------*/
 
 .wchtrf { will-change: transform; }
+
+
+
+/*------------------------------------*\
+    Animations
+\*------------------------------------*/
+
+@keyframes rotation {
+
+	from {
+		transform: rotate(0);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
