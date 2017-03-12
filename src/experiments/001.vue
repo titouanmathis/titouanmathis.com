@@ -23,7 +23,6 @@
 
 		data() {
 			return {
-				radius: 36,
 				total: 10,
 				isDestroyed: true,
 				progress: 0,
@@ -34,6 +33,9 @@
 		},
 
 		computed: {
+			radius() {
+				return this.VIEW_WIDTH > this.VIEW_HEIGHT ? this.VIEW_HEIGHT / 20 : this.VIEW_WIDTH / 20
+			},
 			dotSize() {
 				return this.radius * 5
 			},

@@ -24,13 +24,19 @@
 
 		data() {
 			return {
-				radius: 8,
 				total: 12,
 				isDestroyed: true,
 			}
 		},
 
 		computed: {
+			radius() {
+				const radius = this.VIEW_WIDTH > this.VIEW_HEIGHT ? this.VIEW_HEIGHT / 80 : this.VIEW_WIDTH / 80
+				return Math.round(radius / 2) * 2
+			},
+			borderWidth() {
+				return Math.ceil(this.radius / 5)
+			},
 			dotSize() {
 				return this.radius * 5
 			},
@@ -44,7 +50,7 @@
 
 			createDot() {
 				const $dot = this.createDiv()
-				$dot.classList.add('posa', 't0', 'l0', 'bdrs50p', 'bd2s')
+				$dot.classList.add('posa', 't0', 'l0', 'bdrs50p', 'bd2s', 'bxzcb')
 				return $dot
 			},
 
@@ -114,13 +120,17 @@
 				const $dot = this.createDot()
 				const size = (n * 2) * this.radius
 
-				$dot.__x = this.POINTER_X
-				$dot.__y = this.POINTER_Y
+				console.log(this.radius);
+				console.log(this.borderWidth);
+
+				$dot.__x = this.VIEW_WIDTH / 2
+				$dot.__y = this.VIEW_HEIGHT / 2
 
 				TweenMax.set($dot, {
 					zIndex: this.total - n,
 					width: size,
 					height: size,
+					borderWidth: this.borderWidth + 'px',
 					marginTop: size * -0.5 + 'px',
 					marginLeft: size * -0.5 + 'px',
 					x: $dot.__x,
