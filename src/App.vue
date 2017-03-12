@@ -83,6 +83,7 @@
 			},
 
 			resizeHandler(e) {
+				log('resizeHandler');
 				this.$store.commit('SET_VIEW_WIDTH', window.innerWidth)
 				this.$store.commit('SET_VIEW_WIDTH', window.innerHeight)
 			},
