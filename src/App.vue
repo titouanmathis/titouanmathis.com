@@ -3,13 +3,13 @@
 
 		<div class="z100 posa t1 l1">
 			<h1>Titouan Mathis</h1>
-			<p><a href="https://twitter.com/titouanmathis" target="_blank">twitter</a> — <a href="https://instagram.com/titouanmathis" target="_blank">instagram</a></p>
+			<p><a href="https://twitter.com/titouanmathis" target="_blank" rel="noopener">twitter</a> — <a href="https://instagram.com/titouanmathis" target="_blank" rel="noopener">instagram</a></p>
 		</div>
 
 		<router-view class="posa t0 l0 w100p h100p"></router-view>
 
 		<div class="z100 posa t1 r1 tar">
-			<p>lead developer<br>at <a href="http://www.studiometa.fr" title="Agence Web Strasbourg" target="_blank">studio meta</a></p>
+			<p>lead developer<br>at <a href="http://www.studiometa.fr" title="Agence Web Strasbourg" target="_blank" rel="noopener">studio meta</a></p>
 		</div>
 
 		<router-link :to="next" @click.stop @touchstart.stop @mousemove.stop @touchmove.stop v-if="haveNext" class="z100 posa r1 b1 z1">
