@@ -85,7 +85,10 @@
 					y: this.VIEW_HEIGHT / 2,
 					opacity: 0,
 					ease: Expo.easeOut
-				}, 0.02, done)
+				}, 0.02, () => {
+					forEach(this.$dots, $dot => $dot.classList.add('wchtrf'))
+					done()
+				})
 
 			},
 
