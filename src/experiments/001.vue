@@ -203,7 +203,7 @@
 		width: 200%;
 		height: 200%;
 		background: $white;
-		border: 4px solid $grey-dark;
+		border: 4px solid $black;
 		border-radius: 50%;
 
 		transform: scale(0.5);

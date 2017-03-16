@@ -139,6 +139,7 @@
 </script>
 
 <style lang="scss">
+	@import "../assets/scss/base/variables";
 
 	.xp3 {
 		width: 50vmax;
@@ -164,8 +165,8 @@
 		width: $width;
 		height: $height;
 		margin: $height * -0.5 0 0 $width * -0.5;
-		background-color: #111;
-		border: 1px solid #fff;
+		background-color: $black;
+		border: 1px solid $white;
 		animation: rotation 5s linear infinite;
 	}
 
