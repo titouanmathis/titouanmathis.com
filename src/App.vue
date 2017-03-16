@@ -1,5 +1,6 @@
 <template>
 	<main class="posa w100p	h100p">
+		<reverse/>
 
 		<div class="z100 posa t1 l1">
 			<h1>Titouan Mathis</h1>
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+	import Reverse from './components/Reverse'
 	import { handleEvent } from './utils/mixins'
 	import { log } from './utils'
 	import { on, off } from 'sm-events'
@@ -37,6 +39,9 @@
 	export default {
 		name: 'app',
 		mixins: [ handleEvent() ],
+		components: {
+			Reverse
+		},
 		data() {
 			return {
 				experiments
