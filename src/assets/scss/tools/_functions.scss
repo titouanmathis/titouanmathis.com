@@ -120,6 +120,27 @@
 	@return $value;
 }
 
+
+
+/**
+ * Square root function
+ * @param  {Number} $number The number to compute
+ * @return {Number}         The square root of the number
+ */
+@function sqrt($number) {
+  $x0: 1;
+  $x1: $x0;
+
+  @for $i from 1 through 10 {
+    $x1: $x0 - ($x0 * $x0 - abs($number)) / (2 * $x0);
+    $x0: $x1;
+  }
+
+  @return $x1;
+}
+
+
+
 /**
  * Factorial function
  * @param  {number} $number The number to factorize
